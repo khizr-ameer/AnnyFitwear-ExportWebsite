@@ -13,6 +13,9 @@ async function loadComponent(selector, file) {
 document.addEventListener("DOMContentLoaded", () => {
   loadComponent("#navbar", "components/navbar.html");
   loadComponent("#hero", "components/hero.html");
+  loadComponent("#about", "components/intro.html");
+  loadComponent("#featured-products", "components/featured-products.html");
+   loadComponent("#customization", "components/customization.html");
   loadComponent("#categories", "components/categories.html");
   loadComponent("#footer", "components/footer.html");
 });

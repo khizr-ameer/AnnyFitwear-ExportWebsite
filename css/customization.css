@@ -1,0 +1,139 @@
+/* ================================
+   OEM / CUSTOMIZATION SECTION
+================================ */
+
+.oem-partnership-section {
+  position: relative;
+  padding: 8rem 0;
+  background: radial-gradient(
+    circle at left bottom,
+    rgba(212, 175, 55, 0.04) 0%,
+    transparent 45%
+  );
+  overflow: hidden;
+}
+
+/* GRID (SINGLE COLUMN) */
+.oem-grid.single-column {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* CONTENT */
+.oem-content {
+  text-align: center;
+}
+
+/* SUB HEADING */
+.oem-sub-heading {
+  display: block;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* TITLE OVERRIDE (OPTIONAL FINE-TUNE) */
+.oem-content .section-title {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+/* UNDERLINE */
+.oem-content .title-underline {
+  margin: 0 auto 3rem;
+}
+
+/* DESCRIPTION */
+.oem-description {
+  max-width: 850px;
+  margin: 0 auto 4rem;
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+/* SERVICES GRID */
+.oem-services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+/* SERVICE CARD */
+.oem-service-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--border-radius);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.oem-service-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ICON */
+.oem-service-card i {
+  font-size: 1.6rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+/* CARD TITLE */
+.oem-service-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+  color: var(--text-main);
+}
+
+/* CARD TEXT */
+.oem-service-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* CTA BUTTON */
+.oem-content .btn-primary {
+  padding: 0.8rem 2.2rem;
+  font-size: 0.95rem;
+  border-radius: 999px;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1024px) {
+  .oem-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .oem-content .section-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .oem-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .oem-partnership-section {
+    padding: 6rem 0;
+  }
+
+  .oem-description {
+    font-size: 1.05rem;
+  }
+}

@@ -1,0 +1,90 @@
+/* =========================
+   INTRO SECTION
+========================= */
+
+.intro-section {
+  background: var(--bg-body);
+}
+
+.intro-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Title */
+.section-title {
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-family: var(--font-heading);
+  margin-bottom: 0.8rem;
+}
+
+.title-underline {
+  width: 90px;
+  height: 4px;
+  margin: 0 auto 2rem;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary),
+    transparent
+  );
+  border-radius: 999px;
+}
+
+/* Text */
+.intro-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 3.5rem;
+}
+
+/* =========================
+   STATS GRID
+========================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.stat-item {
+  padding: 2.2rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+}
+
+.stat-item h3 {
+  font-size: 2.2rem;
+  color: var(--primary);
+  margin-bottom: 0.4rem;
+}
+
+.stat-item p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-text {
+    font-size: 1rem;
+  }
+}
