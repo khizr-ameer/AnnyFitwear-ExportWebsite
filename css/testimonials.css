@@ -1,0 +1,155 @@
+/* =========================
+   TESTIMONIALS SECTION
+========================= */
+
+.testimonials-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-light {
+    background-color: var(--bg-body);
+}
+
+/* Carousel wrapper */
+.testimonials-carousel {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    min-height: 320px;
+}
+
+/* Slides */
+.testimonial-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Active slide */
+.testimonial-slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    position: relative;
+}
+
+/* Content card */
+.testimonial-content {
+    text-align: center;
+    padding: 3.5rem 2.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    margin: 2rem 1rem;
+}
+
+/* Quote icon */
+.quote-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+/* Testimonial text */
+.testimonial-content p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+/* Client info – NO avatar */
+.client-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Name */
+.client-info h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* Role / location */
+.client-info span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.testimonial-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 2.5rem;
+}
+
+/* Arrows */
+.prev-testi,
+.next-testi {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.prev-testi:hover,
+.next-testi:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+}
+
+/* Dots */
+.testi-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.testi-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: var(--transition);
+}
+
+.testi-dots span.active {
+    background: var(--primary);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+    .testimonial-content {
+        padding: 2.5rem 1.8rem;
+    }
+
+    .testimonial-content p {
+        font-size: 1rem;
+    }
+}

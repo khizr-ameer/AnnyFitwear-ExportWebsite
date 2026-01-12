@@ -1,0 +1,78 @@
+/* =========================
+   WHY CHOOSE US
+========================= */
+
+.section {
+    padding: 5rem 0;
+}
+
+/* Grid layout */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
+}
+
+/* Feature card */
+.feature-box {
+    text-align: center;
+    padding: 3.5rem 2.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+/* Hover interaction (subtle & premium) */
+.feature-box:hover {
+    transform: translateY(-6px);
+    border-color: var(--primary);
+}
+
+/* Icon styling */
+.feature-box i {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+}
+
+/* Heading */
+.feature-box h4 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-heading);
+}
+
+/* Text */
+.feature-box p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+    .section {
+        padding: 4rem 0;
+    }
+
+    .features-grid {
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .feature-box {
+        padding: 3rem 2rem;
+    }
+
+    .feature-box i {
+        font-size: 2.6rem;
+        margin-bottom: 1.5rem;
+    }
+}

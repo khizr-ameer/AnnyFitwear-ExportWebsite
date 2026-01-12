@@ -15,7 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
   loadComponent("#hero", "components/hero.html");
   loadComponent("#about", "components/intro.html");
   loadComponent("#featured-products", "components/featured-products.html");
-   loadComponent("#customization", "components/customization.html");
+  loadComponent("#customization", "components/customization.html");
+  loadComponent("#manufacturing", "components/manufacturing.html");
+  loadComponent("#choose", "components/choose-us.html");
+  loadComponent("#testimonials", "components/testimonials.html");
+  loadComponent("#certification", "components/certification.html");
   loadComponent("#categories", "components/categories.html");
   loadComponent("#footer", "components/footer.html");
 });

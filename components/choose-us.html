@@ -1,0 +1,90 @@
+<section id="choose" class="section features-section">
+    <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-up">
+            Why Choose Anny Fitwear?
+        </h2>
+
+        <div class="title-underline center" data-aos="fade-up" data-aos-delay="100"></div>
+
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-box" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-shield-alt"></i>
+                <h4>Uncompromised Quality</h4>
+                <p>
+                    Every Anny Fitwear product is crafted using premium-grade materials,
+                    engineered for durability, comfort, and long-term performance.
+                </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-box" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-globe-americas"></i>
+                <h4>Worldwide Reach</h4>
+                <p>
+                    We proudly serve global markets with reliable logistics, ensuring
+                    fast and secure delivery to partners around the world.
+                </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-box" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-pencil-ruler"></i>
+                <h4>Tailored Manufacturing</h4>
+                <p>
+                    From custom sizing to private labeling, Anny Fitwear delivers
+                    fully personalized apparel built to match your brand identity.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".testimonial-slide");
+  const dots = document.querySelectorAll(".testi-dots span");
+  const prevBtn = document.querySelector(".prev-testi");
+  const nextBtn = document.querySelector(".next-testi");
+
+  if (!slides.length) return;
+
+  let currentIndex = 0;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  /* Arrow controls */
+  nextBtn?.addEventListener("click", nextSlide);
+  prevBtn?.addEventListener("click", prevSlide);
+
+  /* Dot controls */
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      currentIndex = index;
+      showSlide(currentIndex);
+    });
+  });
+
+  /* Initialize */
+  showSlide(currentIndex);
+});
+
+</script>

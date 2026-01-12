@@ -55,3 +55,4 @@ setInterval(() => {
 dots.forEach((dot, index) => {
   dot.addEventListener("click", () => showSlide(index));
 });
+
