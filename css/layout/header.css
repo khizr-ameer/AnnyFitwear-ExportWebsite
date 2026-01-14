@@ -74,6 +74,23 @@ body {
   color: var(--primary);
 }
 
+/* Optional underline animation */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
 /* ICON LINKS */
 .cart-link,
 .wishlist-link {
@@ -116,12 +133,12 @@ body {
   position: absolute;
   top: 130%;
   left: 0;
-  min-width: 300px;
+  min-width: 350px;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-soft);
-  padding: 1rem;
+  padding: 1.2rem;
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
