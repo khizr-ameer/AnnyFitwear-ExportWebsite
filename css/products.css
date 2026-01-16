@@ -2,7 +2,7 @@
    PAGE HEADER
 ========================= */
 
-.page-header {
+/* .page-header {
   padding: 6rem 0 4rem;
   background: radial-gradient(circle at top, #1a1a1a, #0b0b0b);
   text-align: center;
@@ -19,7 +19,7 @@
   margin-top: 1rem;
   font-size: 1.1rem;
   color: var(--text-secondary);
-}
+} */
 
 /* =========================
    SECTION

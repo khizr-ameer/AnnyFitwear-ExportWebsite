@@ -55,34 +55,3 @@
     </nav>
   </div>
 </header>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-  const currentPath = window.location.pathname.split("/").pop();
-
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  navLinks.forEach(link => {
-    const linkPath = link.getAttribute("href");
-
-    // Exact match (home, about, contact, etc.)
-    if (linkPath === currentPath) {
-      link.classList.add("active");
-    }
-
-    // Products parent active on all product-related pages
-    if (
-      linkPath === "products.html" &&
-      (
-        currentPath.includes("products") ||
-        currentPath.includes("motorbike") ||
-        currentPath.includes("leather") ||
-        currentPath.includes("fashion") ||
-        currentPath.includes("moto")
-      )
-    ) {
-      link.classList.add("active");
-    }
-  });
-});
-
-</script>
