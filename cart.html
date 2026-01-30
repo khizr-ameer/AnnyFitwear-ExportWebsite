@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart | Anny Fitwear</title>
+
+    <meta
+      name="description"
+      content="Review your selected motorbike gear and request a quote for your wholesale order."
+    />
+
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout/header.css" />
+    <link rel="stylesheet" href="css/layout/footer.css" />
+    <link rel="stylesheet" href="css/cart.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+
+    <main>
+      <!-- CART HERO -->
+      <section class="cart-hero">
+        <div class="container">
+          <div class="cart-hero-content">
+            <span class="category-badge">Quote Request</span>
+            <h1 class="hero-title">Your Cart</h1>
+            <p class="hero-subtitle">Review your selections and request a wholesale quote</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CART SECTION -->
+      <section class="cart-section section">
+        <div class="container">
+          
+          <!-- Empty Cart Message -->
+          <div id="empty-cart" class="empty-cart" style="display: none;">
+            <div class="empty-cart-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h2>Your Cart is Empty</h2>
+            <p>You haven't added any products yet. Browse our collection and add items to request a quote.</p>
+            <a href="products.html" class="btn-primary">
+              <i class="fas fa-box"></i> Browse Products
+            </a>
+          </div>
+
+          <!-- Cart Content -->
+          <div id="cart-content" class="cart-content">
+            <div class="cart-grid">
+              
+              <!-- Cart Items -->
+              <div class="cart-items-section">
+                <div class="section-header">
+                  <h2>Selected Items</h2>
+                  <button class="btn-clear-cart" id="clear-cart">
+                    <i class="fas fa-trash-alt"></i> Clear All
+                  </button>
+                </div>
+
+                <div id="cart-items" class="cart-items">
+                  <!-- Cart items will be loaded here dynamically -->
+                </div>
+              </div>
+
+              <!-- Cart Summary -->
+              <div class="cart-summary-section">
+                <div class="cart-summary">
+                  <h3>Quote Summary</h3>
+                  
+                  <div class="summary-item">
+                    <span>Total Items:</span>
+                    <strong id="total-items">0</strong>
+                  </div>
+
+                  <div class="summary-divider"></div>
+
+                  <div class="summary-note">
+                    <i class="fas fa-info-circle"></i>
+                    <p>As a B2B manufacturer, we provide custom pricing based on quantity and specifications. Request a quote to receive our wholesale rates.</p>
+                  </div>
+
+                  <button class="btn-request-quote" id="request-quote-btn">
+                    <i class="fas fa-envelope"></i> Request Quote
+                  </button>
+
+                  <div class="summary-benefits">
+                    <div class="benefit-item">
+                      <i class="fas fa-check-circle"></i>
+                      <span>Custom Manufacturing</span>
+                    </div>
+                    <div class="benefit-item">
+                      <i class="fas fa-check-circle"></i>
+                      <span>Wholesale Pricing</span>
+                    </div>
+                    <div class="benefit-item">
+                      <i class="fas fa-check-circle"></i>
+                      <span>Global Shipping</span>
+                    </div>
+                    <div class="benefit-item">
+                      <i class="fas fa-check-circle"></i>
+                      <span>Quality Guaranteed</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Continue Shopping -->
+                <a href="products.html" class="btn-continue-shopping">
+                  <i class="fas fa-arrow-left"></i> Continue Shopping
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- FEATURES SECTION -->
+      <section class="features-section section bg-darker">
+        <div class="container">
+          <div class="features-grid">
+            <div class="feature-card">
+              <i class="fas fa-shield-alt"></i>
+              <h3>Premium Quality</h3>
+              <p>CE-certified materials and expert craftsmanship</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-cog"></i>
+              <h3>Fully Customizable</h3>
+              <p>Custom colors, sizes, and branding options</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-shipping-fast"></i>
+              <h3>Fast Delivery</h3>
+              <p>Efficient production and reliable shipping</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-headset"></i>
+              <h3>24/7 Support</h3>
+              <p>Dedicated customer service team</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div>
+      <!-- WhatsApp Floating Button -->
+        <a href="https://wa.me/447438762870?text=Hello%20Anny%20Fitwear!%20I%20am%20interested%20in%20your%20wholesale%20products."
+          class="whatsapp-float"
+          target="_blank"
+          rel="noopener noreferrer">
+
+            <i class="fab fa-whatsapp"></i>
+            <span class="wa-tooltip">Chat with us</span>
+
+        </a>
+
+    </div>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+  </body>
+</html>

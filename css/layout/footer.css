@@ -203,6 +203,7 @@
 .footer-bottom {
   border-top: 1px solid var(--border-color);
   padding: 1.5rem var(--padding-container);
+  margin-top: 19px;
   text-align: center;
   font-size: 0.9rem;
   color: var(--text-muted);

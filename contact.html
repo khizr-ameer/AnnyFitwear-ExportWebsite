@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | Anny Fitwear</title>
+
+    <meta
+      name="description"
+      content="Get in touch with Anny Fitwear for custom motorbike gear manufacturing, wholesale orders, and product inquiries."
+    />
+
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout/header.css" />
+    <link rel="stylesheet" href="css/layout/footer.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+
+    <main>
+      <!-- CONTACT HERO -->
+      <section class="contact-hero">
+        <div class="contact-hero-bg">
+          <img src="assets/images/LeatherJacket_Banner.png" alt="Contact Us">
+          <div class="hero-overlay"></div>
+        </div>
+        <div class="contact-hero-content">
+          <div class="container">
+            <span class="category-badge">Let's Connect</span>
+            <h1 class="hero-title">Contact Us</h1>
+            <p class="hero-subtitle">We're here to help with your custom motorbike gear needs</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT SECTION -->
+      <section class="section contact-section">
+        <div class="container">
+          <div class="contact-grid">
+            <!-- Contact Info -->
+            <div class="contact-info-box">
+              <h2 class="section-title">Get In Touch</h2>
+              <div class="title-underline"></div>
+              <p>Have a question about our products, manufacturing services, or want to place a custom order? Fill
+                out the form or reach us via the details below.</p>
+
+              <div class="contact-details">
+                <div class="contact-item">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <div>
+                    <h4>Visit Us</h4>
+                    <p>UK, London</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="fas fa-envelope"></i>
+                  <div>
+                    <h4>Email Us</h4>
+                    <p>info@annyfitwear.com</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="fas fa-phone"></i>
+                  <div>
+                    <h4>Call Us</h4>
+                    <p>+92 314 7568355</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="fab fa-whatsapp"></i>
+                  <div>
+                    <h4>WhatsApp</h4>
+                    <p>+92 314 7568355</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="social-links-big">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-box">
+              <form action="send_mail.php" method="POST" class="contact-form" id="mainContactForm">
+                <input type="hidden" name="cart_items" id="cart-items-hidden">
+
+                <div class="form-group">
+                  <label for="name">Full Name <span class="required">*</span></label>
+                  <input type="text" id="name" name="name" required placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email Address <span class="required">*</span></label>
+                  <input type="email" id="email" name="email" required placeholder="john@example.com">
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Phone / WhatsApp (Optional)</label>
+                  <input type="tel" id="phone" name="phone" placeholder="+92 300 1234567">
+                </div>
+
+                <div class="form-group">
+                  <label for="subject">Subject <span class="required">*</span></label>
+                  <input type="text" id="subject" name="subject" required placeholder="Inquiry about Motorbike Suits">
+                </div>
+
+                <div class="form-group">
+                  <label for="message">Message <span class="required">*</span></label>
+                  <textarea id="message" name="message" rows="5" required placeholder="Write your message here..."></textarea>
+                </div>
+
+                <!-- Cart Notice (shows when products are in URL) -->
+                <div id="cart-notice" style="display: none; margin-bottom: 1rem; padding: 1rem; background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--primary); border-radius: 4px;">
+                  <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">
+                    <i class="fas fa-shopping-cart" style="color: var(--primary); margin-right: 8px;"></i>
+                    Including inquiry for: <strong id="selected-products-display" style="color: #fff;"></strong>
+                  </p>
+                </div>
+
+                <button type="submit" class="btn-primary full-width">
+                  <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+              </form>
+
+              <!-- Success/Error Messages -->
+              <div id="form-message" class="form-message" style="display: none;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MAP SECTION (Optional) -->
+      <!-- <section class="map-section">
+        <div class="container">
+          <h2 class="section-title text-center">Find Us</h2>
+          <div class="title-underline center"></div>
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3377.5!2d74.5362!3d32.4892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDI5JzIxLjEiTiA3NMKwMzInMTAuMyJF!5e0!3m2!1sen!2s!4v1234567890" 
+              width="100%" 
+              height="450" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </section> -->
+
+      <!-- BUSINESS HOURS / INFO -->
+      <section class="info-section section">
+        <div class="container">
+          <div class="info-grid">
+            <div class="info-card">
+              <i class="fas fa-clock"></i>
+              <h3>Business Hours</h3>
+              <p>Monday - Saturday</p>
+              <p class="highlight">9:00 AM - 6:00 PM (PKT)</p>
+              <p class="muted">Closed on Sundays</p>
+            </div>
+
+            <div class="info-card">
+              <i class="fas fa-shipping-fast"></i>
+              <h3>Worldwide Shipping</h3>
+              <p>We ship globally</p>
+              <p class="highlight">Fast & Reliable Delivery</p>
+              <p class="muted">Track your order anytime</p>
+            </div>
+
+            <div class="info-card">
+              <i class="fas fa-headset"></i>
+              <h3>Customer Support</h3>
+              <p>24/7 Email Support</p>
+              <p class="highlight">Quick Response Time</p>
+              <p class="muted">We're here to help</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div>
+      <!-- WhatsApp Floating Button -->
+        <a href="https://wa.me/447438762870?text=Hello%20Anny%20Fitwear!%20I%20am%20interested%20in%20your%20wholesale%20products."
+          class="whatsapp-float"
+          target="_blank"
+          rel="noopener noreferrer">
+
+            <i class="fab fa-whatsapp"></i>
+            <span class="wa-tooltip">Chat with us</span>
+
+        </a>
+
+    </div>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/contact.js"></script>
+  </body>
+</html>

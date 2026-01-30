@@ -62,9 +62,9 @@ body {
 }
 
 .nav-link {
-  color: var(--text-secondary);
-  font-size: 0.99rem;
-  font-weight: 500;
+  color: var(--text-main);
+  font-size: 1.05rem;
+  font-weight: 520;
   position: relative;
   transition: var(--transition);
 }
