@@ -1,4 +1,8 @@
+/* 1. IMPORT PREMIUM FONTS (Montserrat + Roboto) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap');
+
 :root {
+  /* COLORS (Kept your existing Gold/Black theme) */
   --primary: #d4af37;
   --primary-dark: #b5952f;
   --primary-light: #f3cf55;
@@ -17,14 +21,14 @@
   --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 20px rgba(212, 175, 55, 0.15);
 
-  --font-body: 'Outfit', sans-serif;
-  --font-heading: 'Outfit', sans-serif;
+  /* UPDATED FONTS */
+  --font-body: 'Roboto', sans-serif;       /* Clean, easy to read */
+  --font-heading: 'Montserrat', sans-serif; /* Bold, premium, sporty */
 
   --padding-container: 2rem;
   --border-radius: 12px;
   --transition: all 0.35s ease;
 }
-
 
 *,
 *::before,
@@ -44,8 +48,17 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  font-weight: 300; /* Makes the body text look sleek and modern */
 }
 
+/* PREMIUM HEADING STYLES */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase; /* Adds that high-end brand feel */
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
 
 img {
   max-width: 100%;
@@ -104,6 +117,7 @@ a {
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 600;
+    font-family: var(--font-heading); /* Use the new heading font for tooltip */
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;

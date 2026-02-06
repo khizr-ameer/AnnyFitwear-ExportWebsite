@@ -1,354 +1,325 @@
-/**
- * Navbar JavaScript
- * Handles mobile menu, dropdowns, scroll effects, and active page detection
- */
+// ========================================
+// NAVBAR FUNCTIONALITY
+// Gold & Black Premium Theme
+// Mobile Menu, Dropdowns, Scroll Effects
+// ========================================
 
-(function() {
-  'use strict';
-
-  // ==========================================
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // ================================
   // DOM ELEMENTS
-  // ==========================================
+  // ================================
   const header = document.querySelector('.header');
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const navList = document.getElementById('nav-list');
   const dropdowns = document.querySelectorAll('.dropdown');
+  const navLinks = document.querySelectorAll('.nav-link');
   const body = document.body;
-
-  // ==========================================
+  
+  // ================================
   // MOBILE MENU TOGGLE
-  // ==========================================
+  // ================================
   if (mobileMenuBtn && navList) {
-    mobileMenuBtn.addEventListener('click', function() {
-      const isExpanded = this.getAttribute('aria-expanded') === 'true';
-      
-      // Toggle menu
-      navList.classList.toggle('active');
-      this.classList.toggle('active');
-      
-      // Update ARIA
-      this.setAttribute('aria-expanded', !isExpanded);
-      
-      // Toggle icon
-      const icon = this.querySelector('i');
-      if (icon) {
-        if (navList.classList.contains('active')) {
-          icon.classList.remove('fa-bars');
-          icon.classList.add('fa-times');
-        } else {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-        }
-      }
-      
-      // Prevent body scroll when menu is open
-      if (navList.classList.contains('active')) {
-        body.style.overflow = 'hidden';
-      } else {
-        body.style.overflow = '';
-      }
+    mobileMenuBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleMobileMenu();
     });
   }
-
-  // ==========================================
-  // MOBILE DROPDOWN TOGGLE
-  // ==========================================
-  dropdowns.forEach(dropdown => {
-    const link = dropdown.querySelector('.nav-link');
-    const menu = dropdown.querySelector('.dropdown-menu');
+  
+  function toggleMobileMenu() {
+    const isActive = navList.classList.contains('active');
     
-    if (link && menu) {
-      // Mobile dropdown toggle
-      link.addEventListener('click', function(e) {
-        // Only prevent default on mobile
-        if (window.innerWidth <= 1024) {
+    if (isActive) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  }
+  
+  function openMobileMenu() {
+    navList.classList.add('active');
+    mobileMenuBtn.classList.add('active');
+    body.style.overflow = 'hidden'; // Prevent body scroll
+    
+    // ARIA attributes
+    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    navList.setAttribute('aria-hidden', 'false');
+  }
+  
+  function closeMobileMenu() {
+    navList.classList.remove('active');
+    mobileMenuBtn.classList.remove('active');
+    body.style.overflow = '';
+    
+    // Close all dropdowns
+    dropdowns.forEach(dropdown => {
+      dropdown.classList.remove('open');
+    });
+    
+    // ARIA attributes
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    navList.setAttribute('aria-hidden', 'true');
+  }
+  
+  // ================================
+  // CLOSE MENU ON LINK CLICK (Mobile)
+  // ================================
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      // Don't close if it's a dropdown toggle
+      if (!this.classList.contains('dropdown-toggle') && window.innerWidth < 1025) {
+        setTimeout(() => {
+          closeMobileMenu();
+        }, 200);
+      }
+    });
+  });
+  
+  // ================================
+  // CLOSE MENU ON OUTSIDE CLICK
+  // ================================
+  document.addEventListener('click', function(e) {
+    if (window.innerWidth < 1025 && navList.classList.contains('active')) {
+      if (!navList.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        closeMobileMenu();
+      }
+    }
+  });
+  
+  // ================================
+  // DROPDOWN FUNCTIONALITY
+  // ================================
+  dropdowns.forEach(dropdown => {
+    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+    const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+    
+    if (dropdownToggle) {
+      // Mobile: Click to toggle
+      dropdownToggle.addEventListener('click', function(e) {
+        if (window.innerWidth < 1025) {
           e.preventDefault();
           
-          const isOpen = dropdown.classList.contains('open');
-          
-          // Close all other dropdowns
-          dropdowns.forEach(d => {
-            if (d !== dropdown) {
-              d.classList.remove('open');
-              const otherLink = d.querySelector('.nav-link');
-              if (otherLink) {
-                otherLink.setAttribute('aria-expanded', 'false');
-              }
+          // Close other dropdowns
+          dropdowns.forEach(otherDropdown => {
+            if (otherDropdown !== dropdown) {
+              otherDropdown.classList.remove('open');
             }
           });
           
           // Toggle current dropdown
-          dropdown.classList.toggle('open');
-          this.setAttribute('aria-expanded', !isOpen);
+          const isOpen = dropdown.classList.toggle('open');
+          dropdownToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         }
       });
+      
+      // Desktop: Hover behavior is handled by CSS
     }
   });
-
-  // ==========================================
-  // CLOSE MOBILE MENU ON LINK CLICK
-  // ==========================================
-  const navLinks = navList?.querySelectorAll('.nav-link:not(.dropdown .nav-link)');
-  navLinks?.forEach(link => {
-    link.addEventListener('click', function() {
-      if (window.innerWidth <= 1024 && navList.classList.contains('active')) {
-        navList.classList.remove('active');
-        mobileMenuBtn?.classList.remove('active');
-        mobileMenuBtn?.setAttribute('aria-expanded', 'false');
-        body.style.overflow = '';
-        
-        // Reset icon
-        const icon = mobileMenuBtn?.querySelector('i');
-        if (icon) {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-        }
-      }
-    });
-  });
-
-  // Also close on dropdown item click
-  const dropdownItems = document.querySelectorAll('.dropdown-item');
-  dropdownItems?.forEach(item => {
-    item.addEventListener('click', function() {
-      if (window.innerWidth <= 1024 && navList?.classList.contains('active')) {
-        navList.classList.remove('active');
-        mobileMenuBtn?.classList.remove('active');
-        mobileMenuBtn?.setAttribute('aria-expanded', 'false');
-        body.style.overflow = '';
-        
-        const icon = mobileMenuBtn?.querySelector('i');
-        if (icon) {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-        }
-      }
-    });
-  });
-
-  // ==========================================
-  // SCROLL EFFECTS
-  // ==========================================
-  let lastScrollY = window.scrollY;
-  let ticking = false;
-
-  function updateHeaderOnScroll() {
-    const scrollY = window.scrollY;
-    
-    // Add scrolled class for shadow effect
-    if (scrollY > 50) {
-      header?.classList.add('scrolled');
-    } else {
-      header?.classList.remove('scrolled');
-    }
-    
-    lastScrollY = scrollY;
-    ticking = false;
-  }
-
+  
+  // ================================
+  // HEADER SCROLL EFFECT
+  // ================================
+  let lastScroll = 0;
+  
   window.addEventListener('scroll', function() {
-    if (!ticking) {
-      window.requestAnimationFrame(updateHeaderOnScroll);
-      ticking = true;
-    }
-  });
-
-  // ==========================================
-  // CLOSE MENU ON ESC KEY
-  // ==========================================
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      // Close mobile menu
-      if (navList?.classList.contains('active')) {
-        navList.classList.remove('active');
-        mobileMenuBtn?.classList.remove('active');
-        mobileMenuBtn?.setAttribute('aria-expanded', 'false');
-        body.style.overflow = '';
-        
-        const icon = mobileMenuBtn?.querySelector('i');
-        if (icon) {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-        }
-      }
-      
-      // Close dropdowns
-      dropdowns.forEach(dropdown => {
-        dropdown.classList.remove('open');
-        const link = dropdown.querySelector('.nav-link');
-        if (link) {
-          link.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-  });
-
-  // ==========================================
-  // CLOSE MENU ON OUTSIDE CLICK
-  // ==========================================
-  document.addEventListener('click', function(e) {
-    // Close mobile menu if clicking outside
-    if (navList?.classList.contains('active') && 
-        !navList.contains(e.target) && 
-        !mobileMenuBtn?.contains(e.target)) {
-      navList.classList.remove('active');
-      mobileMenuBtn?.classList.remove('active');
-      mobileMenuBtn?.setAttribute('aria-expanded', 'false');
-      body.style.overflow = '';
-      
-      const icon = mobileMenuBtn?.querySelector('i');
-      if (icon) {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-      }
-    }
-  });
-
-  // ==========================================
-  // HANDLE WINDOW RESIZE
-  // ==========================================
-  let resizeTimer;
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
-      // Close mobile menu on desktop
-      if (window.innerWidth > 1024) {
-        navList?.classList.remove('active');
-        mobileMenuBtn?.classList.remove('active');
-        mobileMenuBtn?.setAttribute('aria-expanded', 'false');
-        body.style.overflow = '';
-        
-        // Close all dropdowns
-        dropdowns.forEach(dropdown => {
-          dropdown.classList.remove('open');
-          const link = dropdown.querySelector('.nav-link');
-          if (link) {
-            link.setAttribute('aria-expanded', 'false');
-          }
-        });
-        
-        const icon = mobileMenuBtn?.querySelector('i');
-        if (icon) {
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-        }
-      }
-    }, 250);
-  });
-
-  // ==========================================
-  // ACTIVE PAGE HIGHLIGHTING - FIXED VERSION
-  // ==========================================
-  function setActiveNav() {
-    // Get current page filename
-    let currentPage = window.location.pathname.split('/').pop();
+    const currentScroll = window.pageYOffset;
     
-    // If empty (root), set to index.html
-    if (!currentPage || currentPage === '') {
-      currentPage = 'index.html';
+    // Add scrolled class when scrolled down
+    if (currentScroll > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
     }
     
-    // Remove active class from all nav links
-    const allNavLinks = document.querySelectorAll('.nav-link');
-    allNavLinks.forEach(link => {
-      link.classList.remove('active');
-      link.removeAttribute('aria-current');
-    });
+    lastScroll = currentScroll;
+  });
+  
+  // ================================
+  // ACTIVE LINK HIGHLIGHTING
+  // ================================
+  function setActiveLink() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
-    // Add active class to matching link
-    const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
-      const href = link.getAttribute('href');
+      const linkPage = link.getAttribute('href');
       
-      // Direct match
-      if (href === currentPage) {
+      // Remove active from all
+      link.classList.remove('active');
+      
+      // Add active to current page
+      if (linkPage === currentPage || 
+          (currentPage === '' && linkPage === 'index.html') ||
+          (currentPage === 'index.html' && linkPage === 'index.html')) {
         link.classList.add('active');
-        link.setAttribute('aria-current', 'page');
-      }
-      // Also check if current page is in dropdown and highlight Products
-      else if (link.textContent.trim().includes('Products')) {
-        const dropdownItems = link.parentElement?.querySelectorAll('.dropdown-item');
-        dropdownItems?.forEach(item => {
-          const itemHref = item.getAttribute('href');
-          if (itemHref === currentPage) {
-            link.classList.add('active');
-            link.setAttribute('aria-current', 'page');
-          }
-        });
       }
     });
   }
-
-  // Set active nav on page load
-  setActiveNav();
-
-  // ==========================================
-  // CART & WISHLIST COUNTER
-  // ==========================================
+  
+  setActiveLink();
+  
+  // ================================
+  // CART & WISHLIST COUNT UPDATE
+  // ================================
   function updateCartCount() {
     const cartCount = document.querySelector('.cart-count');
-    // Get from localStorage or your state management
-    const count = localStorage.getItem('cartCount') || 0;
+    const wishlistCount = document.querySelector('.wishlist-count');
+    
+    // Get counts from localStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
     
     if (cartCount) {
+      const count = cart.length;
       if (count > 0) {
         cartCount.textContent = count;
-        cartCount.style.display = 'flex';
+        cartCount.style.display = 'block';
       } else {
         cartCount.style.display = 'none';
       }
     }
-  }
-
-  function updateWishlistCount() {
-    const wishlistCount = document.querySelector('.wishlist-count');
-    // Get from localStorage or your state management
-    const count = localStorage.getItem('wishlistCount') || 0;
     
     if (wishlistCount) {
+      const count = wishlist.length;
       if (count > 0) {
         wishlistCount.textContent = count;
-        wishlistCount.style.display = 'flex';
+        wishlistCount.style.display = 'block';
       } else {
         wishlistCount.style.display = 'none';
       }
     }
   }
-
-  // Update counts on page load
+  
   updateCartCount();
-  updateWishlistCount();
-
-  // Listen for storage changes (if you update counts from other pages)
-  window.addEventListener('storage', function(e) {
-    if (e.key === 'cartCount') {
-      updateCartCount();
-    }
-    if (e.key === 'wishlistCount') {
-      updateWishlistCount();
+  
+  // Listen for storage changes (from other tabs)
+  window.addEventListener('storage', updateCartCount);
+  
+  // Custom events for cart/wishlist updates (same tab)
+  window.addEventListener('cartUpdated', updateCartCount);
+  window.addEventListener('wishlistUpdated', updateCartCount);
+  
+  // ================================
+  // CLOSE MENU ON WINDOW RESIZE
+  // ================================
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      if (window.innerWidth >= 1025) {
+        closeMobileMenu();
+      }
+    }, 250);
+  });
+  
+  // ================================
+  // KEYBOARD NAVIGATION
+  // ================================
+  
+  // ESC key to close mobile menu
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && navList.classList.contains('active')) {
+      closeMobileMenu();
+      mobileMenuBtn.focus();
     }
   });
-
-  // ==========================================
-  // SMOOTH SCROLL FOR ANCHOR LINKS (optional)
-  // ==========================================
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      if (href !== '#' && href.length > 1) {
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          const headerHeight = header?.offsetHeight || 100;
-          const targetPosition = target.offsetTop - headerHeight;
-          
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
+  
+  // Focus trap in mobile menu when open
+  if (navList) {
+    const focusableElements = navList.querySelectorAll(
+      'a[href], button:not([disabled])'
+    );
+    
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+    
+    navList.addEventListener('keydown', function(e) {
+      if (!navList.classList.contains('active')) return;
+      
+      if (e.key === 'Tab') {
+        if (e.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable.focus();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable.focus();
+          }
         }
       }
     });
+  }
+  
+  // ================================
+  // SMOOTH SCROLL TO TOP ON LOGO CLICK
+  // ================================
+  const logo = document.querySelector('.logo');
+  if (logo) {
+    logo.addEventListener('click', function(e) {
+      const currentPath = window.location.pathname;
+      const isIndex = currentPath.includes('index.html') || 
+                      currentPath === '/' || 
+                      currentPath === '';
+      
+      if (isIndex) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+  
+  // ================================
+  // PREFETCH LINKS ON HOVER (Performance)
+  // ================================
+  const prefetchedLinks = new Set();
+  
+  const prefetchLink = (url) => {
+    if (prefetchedLinks.has(url)) return;
+    
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = url;
+    document.head.appendChild(link);
+    prefetchedLinks.add(url);
+  };
+  
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', function() {
+      const url = this.getAttribute('href');
+      if (url && !url.startsWith('#') && window.innerWidth >= 1025) {
+        prefetchLink(url);
+      }
+    }, { once: true });
   });
+  
+  // ================================
+  // CONSOLE LOG (Development)
+  // ================================
+  console.log('🏍️ Anny Fitwear Navbar Initialized');
+  console.log('✨ Gold & Black Premium Theme');
+});
 
-})();
+// ================================
+// HELPER FUNCTIONS (Global)
+// ================================
+
+// Function to manually update cart count
+// Call this after adding/removing items from cart
+window.updateNavbarCounts = function() {
+  window.dispatchEvent(new Event('cartUpdated'));
+  window.dispatchEvent(new Event('wishlistUpdated'));
+};
+
+// Function to set active nav link programmatically
+window.setNavActive = function(href) {
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === href) {
+      link.classList.add('active');
+    }
+  });
+};
