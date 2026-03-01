@@ -1,231 +1,527 @@
-/* =========================
-   HERO SECTION
-========================= */
+/* ============================================================
+   HERO — Complete Redesign
+   Color scheme preserved from base.css (--primary gold, dark bg)
+   ============================================================ */
 
+/* ---------- Base layout ---------- */
 .hero {
+  position: relative;
   min-height: 100vh;
-  padding: 38px 0 60px;
-  display: flex;
-  align-items: center;
-  background: #000;
-  overflow: hidden;
-}
-
-.hero-container {
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  gap: 2.5rem;
-  max-width: 95%;
-  margin: 0 auto;
-}
-
-/* =========================
-   LEFT CONTENT
-========================= */
-
-.hero-content {
-  border: 1px solid rgba(255,255,255,0.25);
-  background: #0a0a0a;
-  padding: 4.5rem 3.2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.hero-badge {
-  padding: 6px 16px;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--primary);
-  border: 1px solid rgba(212,175,55,0.3);
-  margin-bottom: 2rem;
-  width: fit-content;
-}
-
-.hero-content h1 {
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
-  line-height: 1.1;
-  margin-bottom: 1.6rem;
-}
-
-.hero-content .highlight {
-  color: var(--primary);
-}
-
-.hero-content p {
-  max-width: 520px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 1.4rem;
-  margin-top: 3rem;
-}
-
-/* =========================
-   RIGHT VISUAL
-========================= */
-
-.hero-card {
-  position: relative;
-  width: 100%;
-  max-width: 720px;
-  height: 520px;
-  border: 1px solid rgba(255,255,255,0.25);
-  overflow: hidden;
   background: #000;
-}
-
-.hero-visual {
-  position: relative;
-  width: 100%;
-  max-width: 720px;
-  height: 520px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.25);
+  padding-top: 80px; /* navbar clearance */
 }
 
-.hero-slides {
+/* ---------- Ambient BG decorations ---------- */
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212,175,55,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,175,55,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-bg-glow {
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse, rgba(212,175,55,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------- Main container ---------- */
+.hero-container {
   position: relative;
-  width: 100%;
-  height: 100%;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  z-index: 1;
+}
+
+/* ============================================================
+   STAGE (right side) — full image slider
+   ============================================================ */
+.hero-stage {
+  position: relative;
+  min-height: 580px;
+  overflow: hidden;
 }
 
 /* Slides */
+.hero-slides {
+  position: absolute;
+  inset: 0;
+}
+
 .hero-slide {
   position: absolute;
   inset: 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
   opacity: 0;
-  transform: scale(1.05);
-  transition: opacity 1.2s ease, transform 6s ease-out;
-  pointer-events: none;
+  transition: opacity 1s ease;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-slide.active {
   opacity: 1;
-  transform: scale(1.1);
+}
+
+/* Full image — never cropped */
+.hero-slide img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  /* small padding so image breathes away from edges */
+  padding: 16px;
+  box-sizing: border-box;
+  transition: transform 6s ease-out;
+  transform: scale(1);
+}
+
+.hero-slide.active img {
+  transform: scale(1.04);
+}
+
+/* Overlay — light vignette only at edges so image stays clear */
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    /* left edge — blends into the panel */
+    linear-gradient(90deg, rgba(0,0,0,0.5) 0%, transparent 35%),
+    /* bottom — for caption readability */
+    linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 40%),
+    /* subtle top vignette */
+    linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 30%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---------- Vertical track / dots (right edge of stage) ---------- */
+.hero-track {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  z-index: 10;
+}
+
+.track-line {
+  width: 1px;
+  height: 80px;
+  background: rgba(255,255,255,0.15);
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.track-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--primary, #d4af37);
+  height: 33.33%;
+  transition: height 0.5s ease, top 0.5s ease;
+}
+
+.track-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dot {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  outline: none;
+}
+
+.dot::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.dot.active::before {
+  background: var(--primary, #d4af37);
+  box-shadow: 0 0 10px rgba(212,175,55,0.6);
+  transform: scale(1.3);
+  border-color: var(--primary, #d4af37);
+}
+
+.dot:hover::before {
+  background: rgba(212,175,55,0.5);
+  border-color: var(--primary, #d4af37);
+}
+
+.dot-num {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.dot.active .dot-num {
+  color: var(--primary, #d4af37);
+}
+
+/* ============================================================
+   PANEL (left side) — content card
+   ============================================================ */
+.hero-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 60px 56px 60px 5%;
+  background: linear-gradient(
+    115deg,
+    #060606 0%,
+    #0e0e0e 60%,
+    rgba(10,10,10,0.85) 100%
+  );
+  z-index: 2;
+  /* Diagonal cut toward the image */
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+}
+
+/* Subtle gold left border */
+.hero-panel::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--primary, #d4af37) 30%,
+    var(--primary, #d4af37) 70%,
+    transparent
+  );
+}
+
+.panel-inner {
+  max-width: 560px;
+  width: 100%;
+}
+
+/* ---------- Eyebrow ---------- */
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+.eyebrow-line {
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--primary, #d4af37);
+  flex-shrink: 0;
+}
+
+.eyebrow-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--primary, #d4af37);
+}
+
+/* ---------- Heading ---------- */
+.hero-heading {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.8rem;
+  line-height: 1.0;
+}
+
+.hero-heading .line-1 {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 0.1em;
+}
+
+.hero-heading .line-2 {
+  font-size: clamp(3.8rem, 6vw, 6rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -1px;
+  line-height: 0.9;
+  margin-bottom: 0.1em;
+}
+
+.hero-heading .line-2 em {
+  color: var(--primary, #d4af37);
+  font-style: normal;
+}
+
+.hero-heading .line-3 {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+/* ---------- Sub paragraph ---------- */
+.hero-sub {
+  color: rgba(255,255,255,0.5);
+  line-height: 1.75;
+  font-size: 0.95rem;
+  max-width: 440px;
+  margin-bottom: 2.8rem;
+}
+
+/* ---------- Action buttons ---------- */
+.hero-actions {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: var(--primary, #d4af37);
+  color: #000;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--primary, #d4af37);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+}
+
+.btn-gold:hover {
+  background: transparent;
+  color: var(--primary, #d4af37);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: transparent;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--primary, #d4af37);
+  color: var(--primary, #d4af37);
+  transform: translateY(-2px);
+}
+
+/* ---------- In-panel slide caption ---------- */
+.panel-caption {
+  position: relative;
+  height: 46px;
+  overflow: hidden;
+}
+
+.caption-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+  border-left: 2px solid var(--primary, #d4af37);
+  padding-left: 14px;
+}
+
+.caption-slide.active {
+  opacity: 1;
+  transform: translateY(0);
   pointer-events: auto;
 }
 
-/* Caption */
-.slide-caption {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  background: rgba(0,0,0,0.75);
-  padding: 12px 18px;
-  border-left: 3px solid var(--primary);
-  z-index: 10;
-  backdrop-filter: blur(10px);
-}
-
-.slide-caption span {
-  font-size: 0.75rem;
-  color: var(--primary);
+.caption-tag {
+  font-size: 0.72rem;
   font-weight: 600;
+  color: var(--primary, #d4af37);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  white-space: nowrap;
 }
 
-.slide-caption h3 {
-  font-size: 1.1rem;
-  margin-top: 4px;
-  color: #fff;
+.caption-slide strong {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.8);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
-/* Dots */
-.hero-controls {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
+/* ============================================================
+   BOTTOM MARQUEE STRIP
+   ============================================================ */
+.hero-marquee {
+  position: relative;
+  z-index: 2;
+  background: var(--primary, #d4af37);
+  overflow: hidden;
+  padding: 10px 0;
+  flex-shrink: 0;
+}
+
+.marquee-track {
   display: flex;
-  gap: 8px;
-  z-index: 10;
+  gap: 36px;
+  width: max-content;
+  animation: marquee-scroll 22s linear infinite;
 }
 
-.hero-controls .dot {
-  width: 10px;
-  height: 10px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255,255,255,0.2);
+.marquee-track span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #000;
+  white-space: nowrap;
 }
 
-.hero-controls .dot:hover {
-  background: rgba(212,175,55,0.6);
-  transform: scale(1.2);
-  border-color: var(--primary);
+.marquee-track .sep {
+  color: rgba(0,0,0,0.4);
+  font-size: 0.65rem;
+  letter-spacing: 0;
 }
 
-.hero-controls .dot.active {
-  background: var(--primary);
-  transform: scale(1.15);
-  box-shadow: 0 0 10px rgba(212,175,55,0.5);
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* =========================
+/* ============================================================
    RESPONSIVE
-========================= */
+   ============================================================ */
 
 @media (max-width: 1100px) {
   .hero-container {
     grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
   }
 
-  .hero-card,
-  .hero-visual {
-    height: 420px;
+  /* Panel goes on top */
+  .hero-panel {
+    clip-path: none;
+    padding: 56px 6% 64px;
+    /* Diagonal bottom cut */
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+  }
+
+  .hero-panel::before { display: none; }
+
+  .panel-inner { max-width: 100%; }
+
+  .hero-stage {
+    min-height: 420px;
+  }
+
+  .hero-track {
+    right: 20px;
   }
 }
 
 @media (max-width: 768px) {
   .hero {
-    padding: 90px 0 40px;
+    padding-top: 70px;
   }
 
-  .hero-content {
-    padding: 3rem 2rem;
+  .hero-panel {
+    padding: 48px 5% 72px;
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+  }
+
+  .hero-heading .line-2 {
+    letter-spacing: -0.5px;
   }
 
   .hero-actions {
     flex-direction: column;
+    gap: 0.85rem;
   }
 
-  .hero-card,
-  .hero-visual {
-    height: 320px;
+  .btn-gold,
+  .btn-ghost {
+    text-align: center;
+    justify-content: center;
+    clip-path: none;
   }
 
-  .slide-caption {
-    bottom: 16px;
-    left: 16px;
-    padding: 10px 14px;
+  .hero-stage {
+    min-height: 320px;
   }
 
-  .slide-caption span {
-    font-size: 0.7rem;
+  .hero-track {
+    right: 14px;
   }
 
-  .slide-caption h3 {
-    font-size: 0.95rem;
+  .track-line { height: 60px; }
+
+  .dot-num { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-eyebrow { gap: 8px; }
+  .eyebrow-text { font-size: 0.7rem; letter-spacing: 1.5px; }
+
+  .hero-heading .line-1,
+  .hero-heading .line-3 {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
   }
 
-  .hero-controls {
-    bottom: 16px;
-    right: 16px;
-    gap: 6px;
-  }
-
-  .hero-controls .dot {
-    width: 8px;
-    height: 8px;
-  }
+  .hero-sub { font-size: 0.88rem; }
 }

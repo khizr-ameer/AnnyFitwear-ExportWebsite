@@ -1,72 +1,122 @@
 <section id="home" class="hero">
+
+  <!-- Ambient background elements -->
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-glow"></div>
+
   <div class="hero-container">
 
-    <!-- LEFT CONTENT -->
-    <div class="hero-content">
-      <span class="hero-badge">Anny Fitwear | New Collection 2026</span>
+    <!-- SLIDER — now full-width background layer -->
+    <div class="hero-stage">
 
-      <h1>
-        Crafting <span class="highlight">Elite</span><br>
-        Leather Performance Gear
-      </h1>
+      <div class="hero-slides">
 
-      <p>
-        Premium B2B manufacturing of professional motorbike racing suits and
-        luxury leather fashion. Designed for safety, performance, and style.
-      </p>
-
-      <div class="hero-actions">
-        <a href="products.html" class="btn-primary">
-          Explore Collection <i class="fas fa-arrow-right"></i>
-        </a>
-        <a href="contact.html" class="btn-primary">
-          Request Quote
-        </a>
-      </div>
-    </div>
-
-    <!-- RIGHT VISUAL / SLIDER -->
-    <div class="hero-visual">
-      <div class="hero-card">
-
-        <div class="hero-slides">
-          <!-- Slide 1 (active by default) -->
-          <div class="hero-slide active"
-               style="background-image: url('assets/images/MotoRacing_Banner.png');">
-            <div class="slide-caption">
-              <span>Professional Racing</span>
-              <h3>Moto GP Suits</h3>
-            </div>
-          </div>
-
-          <!-- Slide 2 -->
-          <div class="hero-slide"
-               style="background-image: url('assets/images/LeatherJacket_Banner.png');">
-            <div class="slide-caption">
-              <span>Urban Ride</span>
-              <h3>Leather Jackets</h3>
-            </div>
-          </div>
-
-          <!-- Slide 3 -->
-          <div class="hero-slide"
-               style="background-image: url('assets/images/StreetWear_Banner.png');">
-            <div class="slide-caption">
-              <span>Street Fashion</span>
-              <h3>Fashion Collection</h3>
-            </div>
-          </div>
+        <!-- Slide 1 (active) -->
+        <div class="hero-slide active">
+          <img src="assets/images/MotoRacing_Banner.png" alt="Moto Racing Suit">
+          <div class="slide-overlay"></div>
         </div>
 
-        <!-- SLIDER CONTROLS -->
-        <div class="hero-controls">
-          <span class="dot active"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
+        <!-- Slide 2 -->
+        <div class="hero-slide">
+          <img src="assets/images/LeatherJacket_Banner.png" alt="Leather Jacket">
+          <div class="slide-overlay"></div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="hero-slide">
+          <img src="assets/images/StreetWear_Banner.png" alt="Street Fashion">
+          <div class="slide-overlay"></div>
+        </div>
+
+      </div>
+
+      <!-- Vertical slide track indicator -->
+      <div class="hero-track">
+        <div class="track-line">
+          <div class="track-fill"></div>
+        </div>
+        <div class="track-dots">
+          <button class="dot active" aria-label="Slide 1">
+            <span class="dot-num">01</span>
+          </button>
+          <button class="dot" aria-label="Slide 2">
+            <span class="dot-num">02</span>
+          </button>
+          <button class="dot" aria-label="Slide 3">
+            <span class="dot-num">03</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTENT PANEL — diagonal-cut card over the image -->
+    <div class="hero-panel">
+
+      <div class="panel-inner">
+
+        <div class="hero-eyebrow">
+          <span class="eyebrow-line"></span>
+          <span class="eyebrow-text">Anny Fitwear · New Collection 2026</span>
+        </div>
+
+        <h1 class="hero-heading">
+          <span class="line-1">Crafting</span>
+          <span class="line-2">Elite<em>.</em></span>
+          <span class="line-3">Leather Gear</span>
+        </h1>
+
+        <p class="hero-sub">
+          Premium B2B manufacturing of professional motorbike racing suits
+          and luxury leather fashion — engineered for safety, performance, and style.
+        </p>
+
+        <div class="hero-actions">
+          <a href="products.html" class="btn-gold">
+            Explore Collection
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="contact.html" class="btn-ghost">Request Quote</a>
+        </div>
+
+        <!-- Slide caption — dynamic per slide -->
+        <div class="panel-caption">
+          <div class="caption-slide active">
+            <span class="caption-tag">Professional Racing</span>
+            <strong>Moto GP Suits</strong>
+          </div>
+          <div class="caption-slide">
+            <span class="caption-tag">Urban Ride</span>
+            <strong>Leather Jackets</strong>
+          </div>
+          <div class="caption-slide">
+            <span class="caption-tag">Street Fashion</span>
+            <strong>Fashion Collection</strong>
+          </div>
         </div>
 
       </div>
     </div>
 
   </div>
+
+  <!-- Bottom marquee strip -->
+  <div class="hero-marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Racing Suits</span><span class="sep">✦</span>
+      <span>Leather Jackets</span><span class="sep">✦</span>
+      <span>Fashion Wear</span><span class="sep">✦</span>
+      <span>B2B Manufacturing</span><span class="sep">✦</span>
+      <span>Custom Orders</span><span class="sep">✦</span>
+      <span>Racing Suits</span><span class="sep">✦</span>
+      <span>Leather Jackets</span><span class="sep">✦</span>
+      <span>Fashion Wear</span><span class="sep">✦</span>
+      <span>B2B Manufacturing</span><span class="sep">✦</span>
+      <span>Custom Orders</span><span class="sep">✦</span>
+    </div>
+  </div>
+
 </section>

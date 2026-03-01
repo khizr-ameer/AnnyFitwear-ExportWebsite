@@ -1,78 +1,211 @@
-/* =========================
-   WHY CHOOSE US
-========================= */
+/* ============================================================
+   WHY CHOOSE US / FEATURES — Complete Redesign
+   ============================================================ */
 
-.section {
-    padding: 5rem 0;
+.features-section {
+  position: relative;
+  background: var(--bg-body);
+  margin-top: 150px;
+  overflow: hidden;
 }
 
-/* Grid layout */
+/* Subtle top-center glow */
+.features-bg-glow {
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(212,175,55,0.05) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ============================================================
+   HEADER — two-column split
+   ============================================================ */
+.features-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4rem;
+}
+
+.features-header-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.features-title {
+  font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+  font-family: var(--font-heading, serif);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--text-primary, #fff);
+}
+
+.features-title em {
+  font-style: normal;
+  color: var(--primary, #d4af37);
+  display: block;
+}
+
+.features-subtitle {
+  max-width: 340px;
+  font-size: 0.95rem;
+  color: var(--text-secondary, rgba(255,255,255,0.5));
+  line-height: 1.7;
+  text-align: right;
+  padding-bottom: 6px;
+}
+
+/* ============================================================
+   GRID — three cards, center one elevated
+   ============================================================ */
 .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2.5rem;
-    margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: start;
 }
 
-/* Feature card */
-.feature-box {
-    text-align: center;
-    padding: 3.5rem 2.5rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    transition: var(--transition);
+/* ---- Card ---- */
+.feature-card {
+  position: relative;
+  background: var(--bg-card, #0e0e0e);
+  border: 1px solid var(--border-color, rgba(255,255,255,0.08));
+  padding: 2.4rem 2rem 2rem;
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover interaction (subtle & premium) */
-.feature-box:hover {
-    transform: translateY(-6px);
-    border-color: var(--primary);
+.feature-card:hover {
+  border-color: rgba(212,175,55,0.35);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
 }
 
-/* Icon styling */
-.feature-box i {
-    font-size: 3rem;
-    color: var(--primary);
-    margin-bottom: 2rem;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+/* Center card — raised by default, gold tint */
+.feature-card.center {
+  border-color: rgba(212,175,55,0.2);
+  background: linear-gradient(
+    160deg,
+    rgba(212,175,55,0.06) 0%,
+    var(--bg-card, #0e0e0e) 50%
+  );
+  margin-top: -1.5rem;
+  padding-top: 3rem;
 }
 
-/* Heading */
-.feature-box h4 {
-    font-size: 1.35rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--text-heading);
+.feature-card.center::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary, #d4af37);
 }
 
-/* Text */
-.feature-box p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--text-muted);
+/* Index number — watermark style */
+.feature-num {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.4rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(212,175,55,0.2);
 }
 
-/* =========================
+/* Icon */
+.feature-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(212,175,55,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary, #d4af37);
+  font-size: 1.25rem;
+  margin-bottom: 1.6rem;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.feature-card:hover .feature-icon-wrap,
+.feature-card.center .feature-icon-wrap {
+  background: rgba(212,175,55,0.08);
+  border-color: rgba(212,175,55,0.4);
+}
+
+.feature-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary, #fff);
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.feature-card:hover h4 {
+  color: var(--primary, #d4af37);
+}
+
+.feature-card p {
+  font-size: 0.88rem;
+  color: var(--text-secondary, rgba(255,255,255,0.45));
+  line-height: 1.75;
+  margin-bottom: 1.6rem;
+}
+
+/* Animated bottom bar */
+.feature-card-bar {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--primary, #d4af37);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.feature-card:hover .feature-card-bar::after {
+  transform: scaleX(1);
+}
+
+/* ============================================================
    RESPONSIVE
-========================= */
+   ============================================================ */
+@media (max-width: 900px) {
+  .features-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .features-subtitle {
+    text-align: left;
+    max-width: 100%;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .feature-card.center {
+    margin-top: 0;
+    padding-top: 2.4rem;
+  }
+  .feature-card.center::before { display: none; }
+}
 
-@media (max-width: 768px) {
-    .section {
-        padding: 4rem 0;
-    }
-
-    .features-grid {
-        gap: 2rem;
-        margin-top: 3rem;
-    }
-
-    .feature-box {
-        padding: 3rem 2rem;
-    }
-
-    .feature-box i {
-        font-size: 2.6rem;
-        margin-bottom: 1.5rem;
-    }
+@media (max-width: 520px) {
+  .features-title { font-size: 2.1rem; }
+  .feature-card { padding: 2rem 1.6rem 1.6rem; }
 }

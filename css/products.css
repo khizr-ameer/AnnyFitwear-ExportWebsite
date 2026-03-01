@@ -1,217 +1,387 @@
-/* =========================
-   PAGE HEADER
-========================= */
+/* ============================================================
+   PRODUCTS PAGE — Complete Redesign
+   ============================================================ */
 
-/* .page-header {
-  padding: 6rem 0 4rem;
-  background: radial-gradient(circle at top, #1a1a1a, #0b0b0b);
-  text-align: center;
-  border-bottom: 1px solid var(--border-color);
+/* ============================================================
+   PAGE HERO
+   ============================================================ */
+.products-hero {
+  position: relative;
+  padding: 160px 0 80px;
+  background: #000;
+  overflow: hidden;
 }
 
-.page-header h1 {
-  font-size: 3rem;
+/* Diagonal grid background */
+.products-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212,175,55,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,175,55,0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+
+/* Radial gold glow top-right */
+.products-hero::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 50%;
+  height: 100%;
+  background: radial-gradient(ellipse, rgba(212,175,55,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.products-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+.products-hero-title {
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-family: var(--font-heading, serif);
+  font-weight: 800;
+  line-height: 1.0;
+  color: #fff;
+  margin: 1rem 0 1.6rem;
+}
+
+.products-hero-title em {
+  font-style: normal;
+  color: var(--primary, #d4af37);
+  display: block;
+}
+
+.products-hero-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.75;
+  max-width: 500px;
+}
+
+/* ============================================================
+   PRODUCTS SECTION
+   ============================================================ */
+.products-section {
+  background: var(--bg-body, #0a0a0a);
+  padding-top: 4rem;
+}
+
+/* Header row above grid */
+.products-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.products-section-head-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cat-count {
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--text-main);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 5px 12px;
 }
 
-.page-header p {
-  margin-top: 1rem;
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-} */
-
-/* =========================
-   SECTION
-========================= */
-
-.section {
-  padding: 5rem 0;
-}
-
-.bg-darker {
-  background-color: var(--bg-body);
-}
-
-.text-center {
-  text-align: center;
-}
-
-/* =========================
-   SECTION TITLE
-========================= */
-
-.section-title {
-  font-size: 2.6rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--primary);
-}
-
-.title-underline {
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, var(--primary), transparent);
-  margin: 0 auto 4rem;
-  border-radius: 2px;
-}
-
-/* =========================
-   CATEGORY GRID (MAIN)
-========================= */
-
+/* ============================================================
+   BENTO GRID — 4 cols × 3 rows, all 8 cards explicitly placed
+   Row 1: [suit:2col] [jacket:1col] [gloves:1col]
+   Row 2: [pants:1col] [fashion:2col] [leather-jacket:1col]
+   Row 3: [denim:1col] [racing:2col] [-- implicit fill]
+   ============================================================ */
 .category-bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 320px;
-  gap: clamp(1.2rem, 2.5vw, 3rem);
-  margin-top: 4rem;
+  grid-template-rows: repeat(3, 300px);
+  gap: 1.2rem;
 }
 
-/* =========================
-   CATEGORY CARD
-========================= */
+/* ---- Explicit card placement ---- */
+/* Row 1 */
+.bento-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1; } /* Motorbike Suits — wide */
+.bento-item:nth-child(2) { grid-column: 3 / 4; grid-row: 1; } /* Motorbike Jackets */
+.bento-item:nth-child(3) { grid-column: 4 / 5; grid-row: 1; } /* Motorbike Gloves */
 
+/* Row 2 */
+.bento-item:nth-child(4) { grid-column: 1 / 2; grid-row: 2; } /* Leather Pants */
+.bento-item:nth-child(5) { grid-column: 2 / 4; grid-row: 2; } /* Fashion Jackets — wide */
+.bento-item:nth-child(6) { grid-column: 4 / 5; grid-row: 2; } /* Leather Jackets */
+
+/* Row 3 */
+.bento-item:nth-child(7) { grid-column: 1 / 2; grid-row: 3; } /* Motorbike Denim */
+.bento-item:nth-child(8) { grid-column: 2 / 4; grid-row: 3; } /* Racing Suits — wide */
+
+/* Remove class-based span overrides (placement is explicit now) */
+.bento-item.featured,
+.bento-item.featured-wide {
+  /* placement handled by nth-child above */
+}
+
+/* ---- Base card ---- */
 .bento-item {
   position: relative;
-  border-radius: 20px;
   overflow: hidden;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background: #000;
+  border: 1px solid var(--border-color, rgba(255,255,255,0.08));
   text-decoration: none;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: block;
+  transition: border-color 0.3s ease;
 }
 
-/* Image */
+/* Image — contain so full product is always visible */
 .bento-item img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s ease;
+  object-fit: contain;
+  object-position: center;
+  padding: 10px;
+  transition: transform 0.7s ease, filter 0.5s ease;
+  filter: brightness(0.92);
 }
 
-/* =========================
-   OVERLAY
-========================= */
+.bento-item:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.7);
+}
 
+/* ---- Overlay ---- */
 .bento-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.85),
-    rgba(0, 0, 0, 0.35),
-    rgba(0, 0, 0, 0.05)
+    rgba(0,0,0,0.88) 0%,
+    rgba(0,0,0,0.3) 50%,
+    transparent 100%
   );
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1.6rem;
-}
-
-.bento-overlay h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--primary);
-  letter-spacing: 0.4px;
-}
-
-.bento-overlay p {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  opacity: 0.85;
-  margin-top: 4px;
-}
-
-/* =========================
-   BADGE
-========================= */
-
-.bento-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  background: var(--primary);
-  color: #000;
-  padding: 6px 14px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  border-radius: 20px;
+  padding: 1.6rem 1.8rem;
   z-index: 2;
 }
 
-/* =========================
-   HOVER EFFECTS (DESKTOP)
-========================= */
-
-.bento-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45);
+/* Small category tag */
+.bento-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #000;
+  background: var(--primary, #d4af37);
+  padding: 3px 9px;
+  width: fit-content;
+  margin-bottom: 0.7rem;
+  /* Slide in from left on hover */
+  transform: translateX(-6px);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
-.bento-item:hover img {
-  transform: scale(1.08);
+.bento-item:hover .bento-tag {
+  transform: translateX(0);
+  opacity: 1;
 }
 
-/* =========================
-   RESPONSIVE GRID
-========================= */
-
-@media (max-width: 1200px) {
-  .category-bento-grid {
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 280px;
-  }
+.bento-overlay h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+  transition: color 0.3s ease;
+  line-height: 1.2;
 }
 
-@media (max-width: 900px) {
+.bento-item.featured .bento-overlay h3 {
+  font-size: 1.5rem;
+}
+
+.bento-item:hover .bento-overlay h3 {
+  color: var(--primary, #d4af37);
+}
+
+.bento-overlay p {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.bento-item:hover .bento-overlay p {
+  color: rgba(255,255,255,0.7);
+}
+
+/* Arrow icon — slides up on hover */
+.bento-arrow {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem;
+  opacity: 0;
+  transform: translate(4px, -4px);
+  transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.bento-item:hover .bento-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+  border-color: var(--primary, #d4af37);
+  color: var(--primary, #d4af37);
+}
+
+/* Gold left-border accent on hover */
+.bento-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--primary, #d4af37);
+  z-index: 3;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s ease;
+}
+
+.bento-item:hover::before {
+  transform: scaleY(1);
+}
+
+/* ============================================================
+   CTA STRIP
+   ============================================================ */
+.products-cta-strip {
+  background: #050505;
+  border-top: 1px solid rgba(212,175,55,0.12);
+  border-bottom: 1px solid rgba(212,175,55,0.12);
+  padding: 3.5rem 0;
+}
+
+.cta-strip-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.cta-strip-text h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+.cta-strip-text p {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.4);
+}
+
+.btn-gold.cta-strip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 30px;
+  background: var(--primary, #d4af37);
+  color: #000;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--primary, #d4af37);
+  white-space: nowrap;
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-gold.cta-strip-btn:hover {
+  background: transparent;
+  color: var(--primary, #d4af37);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* 2-col tablet */
+@media (max-width: 1024px) {
   .category-bento-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 260px;
+    grid-template-rows: repeat(5, 260px);
   }
+
+  /* Row 1: suit wide, jacket */
+  .bento-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1; }
+  .bento-item:nth-child(2) { grid-column: 1 / 2; grid-row: 2; }
+  .bento-item:nth-child(3) { grid-column: 2 / 3; grid-row: 2; }
+  .bento-item:nth-child(4) { grid-column: 1 / 2; grid-row: 3; }
+  .bento-item:nth-child(5) { grid-column: 2 / 3; grid-row: 3; }
+  .bento-item:nth-child(6) { grid-column: 1 / 2; grid-row: 4; }
+  .bento-item:nth-child(7) { grid-column: 2 / 3; grid-row: 4; }
+  .bento-item:nth-child(8) { grid-column: 1 / 3; grid-row: 5; }
+
+  .cta-strip-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .btn-gold.cta-strip-btn { clip-path: none; }
 }
 
-@media (max-width: 600px) {
+/* 1-col mobile */
+@media (max-width: 560px) {
+  .products-hero {
+    padding: 130px 0 60px;
+  }
+
   .category-bento-grid {
     grid-template-columns: 1fr;
-    grid-auto-rows: 240px;
+    grid-template-rows: none;
   }
 
-  .page-header h1 {
-    font-size: 2.3rem;
+  /* Reset all explicit placement — stack naturally */
+  .bento-item:nth-child(n) {
+    grid-column: auto;
+    grid-row: auto;
+    height: 240px;
   }
-}
 
-/* =========================
-   MOBILE IMAGE FIX (NO CROP)
-========================= */
-
-@media (max-width: 600px) {
-  .bento-item img {
-    object-fit: contain;
-    background: #000;
-    padding: 12px;
-    transform: none !important;
-  }
-}
-
-/* =========================
-   TOUCH-FRIENDLY MOBILE UX
-========================= */
-
-@media (max-width: 768px) {
-  .bento-item:hover {
+  /* No scale on touch */
+  .bento-item:hover img {
     transform: none;
-    box-shadow: none;
+  }
+
+  .products-section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 }
 
-/* =========================
-   ACTIVE TAP FEEDBACK
-========================= */
-
+/* Active tap feedback */
 .bento-item:active {
   transform: scale(0.98);
 }

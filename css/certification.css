@@ -1,90 +1,153 @@
-/* =========================
-   CERTIFICATIONS SECTION
-========================= */
+/* ============================================================
+   CERTIFICATIONS — Complete Redesign
+   ============================================================ */
 
 .certifications-section {
   background: var(--bg-body);
   overflow: hidden;
+  margin-top: 150px;
+  padding-bottom: 0;
 }
 
-/* Marquee container */
-.cert-marquee-container {
+/* ---- Header ---- */
+.cert-header {
+  margin-bottom: 3rem;
+}
+
+.cert-title {
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-family: var(--font-heading, serif);
+  font-weight: 800;
+  color: var(--text-primary, #fff);
+  margin-top: 1rem;
+  line-height: 1.1;
+}
+
+.cert-title em {
+  font-style: normal;
+  color: var(--primary, #d4af37);
+}
+
+/* ============================================================
+   MARQUEE STRIP — full-bleed dark bar
+   ============================================================ */
+.cert-marquee-wrapper {
   position: relative;
+  background: #080808;
+  border-top: 1px solid rgba(212,175,55,0.12);
+  border-bottom: 1px solid rgba(212,175,55,0.12);
+  padding: 22px 0;
   overflow: hidden;
-  margin-top: 4rem;
-  padding: 1rem 0;
 }
 
-/* Marquee track */
-.cert-marquee {
+/* Fade masks on edges */
+.cert-fade-left,
+.cert-fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cert-fade-left {
+  left: 0;
+  background: linear-gradient(90deg, #080808, transparent);
+}
+
+.cert-fade-right {
+  right: 0;
+  background: linear-gradient(-90deg, #080808, transparent);
+}
+
+/* Scrolling track */
+.cert-track {
   display: flex;
-  gap: 4rem;
+  align-items: center;
+  gap: 0;
   width: max-content;
-  animation: certScroll 30s linear infinite;
+  animation: cert-scroll 28s linear infinite;
 }
 
-/* Certification card */
+.cert-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes cert-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---- Individual cert item ---- */
 .cert-item {
-  min-width: 180px;
-  text-align: center;
-  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 40px;
+  white-space: nowrap;
 }
 
-/* Circle icon */
-.cert-circle {
-  width: 90px;
-  height: 90px;
-  margin: 0 auto 1rem;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+/* Square icon box */
+.cert-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(212,175,55,0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--transition);
+  color: var(--primary, #d4af37);
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: background 0.3s ease;
 }
 
-.cert-circle i {
-  font-size: 2rem;
-  color: var(--primary);
+.cert-item:hover .cert-icon {
+  background: rgba(212,175,55,0.1);
 }
 
-/* Text */
-.cert-item p {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+/* Text stack */
+.cert-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.cert-text strong {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary, #fff);
+  letter-spacing: 0.3px;
+}
+
+.cert-text span {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.3);
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-/* Hover effect */
-.cert-item:hover .cert-circle {
-  border-color: var(--primary);
-  box-shadow: var(--shadow-glow);
-  transform: translateY(-4px);
+/* Separator diamond */
+.cert-sep {
+  font-size: 0.5rem;
+  color: rgba(212,175,55,0.25);
+  flex-shrink: 0;
+  user-select: none;
 }
 
-/* Infinite scroll animation */
-@keyframes certScroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-/* Responsive */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 768px) {
-  .cert-marquee {
-    gap: 2.5rem;
+  .cert-item {
+    padding: 0 28px;
+    gap: 10px;
   }
-
-  .cert-circle {
-    width: 75px;
-    height: 75px;
+  .cert-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 0.88rem;
   }
-
-  .cert-circle i {
-    font-size: 1.6rem;
-  }
+  .cert-text strong { font-size: 0.82rem; }
+  .cert-text span { display: none; }
 }

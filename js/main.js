@@ -33,10 +33,11 @@ document.addEventListener("click", function (e) {
 // ===============================
 
 function initHeroSlider() {
-  const slides = document.querySelectorAll(".hero-slide");
-  const dots = document.querySelectorAll(".hero-controls .dot");
-  
-  // Check if elements exist
+  const slides       = document.querySelectorAll(".hero-slide");
+  const dots         = document.querySelectorAll(".hero-track .dot");
+  const captions     = document.querySelectorAll(".caption-slide");
+  const trackFill    = document.querySelector(".track-fill");
+
   if (!slides.length || !dots.length) {
     console.log("Hero slider elements not found yet");
     return;
@@ -45,50 +46,61 @@ function initHeroSlider() {
   let currentSlide = 0;
   let autoSlideInterval;
 
+  // Update track fill position to indicate current dot
+  function updateTrackFill(index) {
+    if (!trackFill) return;
+    const pct = (index / (slides.length - 1)) * 100;
+    trackFill.style.height = `${(index + 1) / slides.length * 100}%`;
+  }
+
   // Show slide by index
   function showSlide(index) {
     slides.forEach((slide, i) => {
       slide.classList.toggle("active", i === index);
-      dots[i].classList.toggle("active", i === index);
     });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+    captions.forEach((cap, i) => {
+      cap.classList.toggle("active", i === index);
+    });
+    updateTrackFill(index);
     currentSlide = index;
   }
 
-  // Next slide function
+  // Next slide
   function nextSlide() {
-    let next = (currentSlide + 1) % slides.length;
-    showSlide(next);
+    showSlide((currentSlide + 1) % slides.length);
   }
 
-  // Start auto-slide
+  // Auto-slide control
   function startAutoSlide() {
-    autoSlideInterval = setInterval(nextSlide, 6000); // 6 seconds
+    autoSlideInterval = setInterval(nextSlide, 6000);
   }
-
-  // Stop auto-slide
   function stopAutoSlide() {
     clearInterval(autoSlideInterval);
   }
 
-  // Manual navigation via dots
+  // Dot clicks
   dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
       stopAutoSlide();
       showSlide(index);
-      startAutoSlide(); // Restart after manual click
+      startAutoSlide();
     });
   });
 
-  // Optional: Pause on hover
-  const heroCard = document.querySelector(".hero-card");
-  if (heroCard) {
-    heroCard.addEventListener("mouseenter", stopAutoSlide);
-    heroCard.addEventListener("mouseleave", startAutoSlide);
+  // Pause on hover over stage
+  const heroStage = document.querySelector(".hero-stage");
+  if (heroStage) {
+    heroStage.addEventListener("mouseenter", stopAutoSlide);
+    heroStage.addEventListener("mouseleave", startAutoSlide);
   }
 
-  // Start the auto-slide
+  // Initialise
+  showSlide(0);
   startAutoSlide();
-  
+
   console.log("Hero slider initialized successfully");
 }
 
@@ -101,7 +113,7 @@ function initTestimonials() {
   const dots = document.querySelectorAll(".testi-dots span");
   const prevBtn = document.querySelector(".prev-testi");
   const nextBtn = document.querySelector(".next-testi");
-  
+
   if (!testimonialSlides.length) {
     console.log("Testimonials not found");
     return;
@@ -110,108 +122,75 @@ function initTestimonials() {
   let currentTestimonial = 0;
   let testimonialInterval;
 
-  // Show testimonial by index
   function showTestimonial(index) {
-    // Remove active class from all slides and dots
-    testimonialSlides.forEach((slide) => {
-      slide.classList.remove("active");
-    });
-    
-    dots.forEach((dot) => {
-      dot.classList.remove("active");
-    });
-    
-    // Add active class to current slide and dot
+    testimonialSlides.forEach(slide => slide.classList.remove("active"));
+    dots.forEach(dot => dot.classList.remove("active"));
     testimonialSlides[index].classList.add("active");
     dots[index].classList.add("active");
-    
     currentTestimonial = index;
   }
 
-  // Next testimonial
   function nextTestimonial() {
-    let next = (currentTestimonial + 1) % testimonialSlides.length;
-    showTestimonial(next);
+    showTestimonial((currentTestimonial + 1) % testimonialSlides.length);
   }
 
-  // Previous testimonial
   function prevTestimonial() {
-    let prev = (currentTestimonial - 1 + testimonialSlides.length) % testimonialSlides.length;
-    showTestimonial(prev);
+    showTestimonial((currentTestimonial - 1 + testimonialSlides.length) % testimonialSlides.length);
   }
 
-  // Start auto-slide
   function startTestimonialSlide() {
-    testimonialInterval = setInterval(nextTestimonial, 5000); // 5 seconds
+    testimonialInterval = setInterval(nextTestimonial, 5000);
   }
-
-  // Stop auto-slide
   function stopTestimonialSlide() {
     clearInterval(testimonialInterval);
   }
 
-  // Next button click
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
-      stopTestimonialSlide();
-      nextTestimonial();
-      startTestimonialSlide();
+      stopTestimonialSlide(); nextTestimonial(); startTestimonialSlide();
     });
   }
-
-  // Previous button click
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
-      stopTestimonialSlide();
-      prevTestimonial();
-      startTestimonialSlide();
+      stopTestimonialSlide(); prevTestimonial(); startTestimonialSlide();
     });
   }
 
-  // Dot navigation
   dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
-      stopTestimonialSlide();
-      showTestimonial(index);
-      startTestimonialSlide();
+      stopTestimonialSlide(); showTestimonial(index); startTestimonialSlide();
     });
   });
 
-  // Pause on hover (optional)
   const testimonialCarousel = document.querySelector(".testimonials-carousel");
   if (testimonialCarousel) {
     testimonialCarousel.addEventListener("mouseenter", stopTestimonialSlide);
     testimonialCarousel.addEventListener("mouseleave", startTestimonialSlide);
   }
 
-  // Initialize: Find which slide has 'active' class or default to first
-  const activeSlide = Array.from(testimonialSlides).findIndex(slide => slide.classList.contains('active'));
-  if (activeSlide !== -1) {
-    currentTestimonial = activeSlide;
-  } else {
-    showTestimonial(0); // Default to first slide if none active
-  }
-
-  // Start auto-slide
+  const activeSlide = Array.from(testimonialSlides).findIndex(s => s.classList.contains("active"));
+  currentTestimonial = activeSlide !== -1 ? activeSlide : 0;
+  showTestimonial(currentTestimonial);
   startTestimonialSlide();
-  
+
   console.log("Testimonials initialized successfully");
 }
 
-  document.addEventListener("DOMContentLoaded", () => {
-  const currentPath = window.location.pathname.split("/").pop();
+// ===============================
+// ACTIVE NAV LINKS
+// ===============================
 
+document.addEventListener("DOMContentLoaded", () => {
+  const currentPath = window.location.pathname.split("/").pop();
   const navLinks = document.querySelectorAll(".nav-link");
 
   navLinks.forEach(link => {
     const linkPath = link.getAttribute("href");
 
-    // Exact match (home, about, contact, etc.)
     if (linkPath === currentPath) {
       link.classList.add("active");
     }
 
-    // Products parent active on all product-related pages
     if (
       linkPath === "products.html" &&
       (
@@ -225,4 +204,8 @@ function initTestimonials() {
       link.classList.add("active");
     }
   });
+
+  // Init sliders on DOMContentLoaded
+  initHeroSlider();
+  initTestimonials();
 });

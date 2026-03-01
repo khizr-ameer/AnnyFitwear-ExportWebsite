@@ -1,139 +1,206 @@
-/* ================================
-   OEM / CUSTOMIZATION SECTION
-================================ */
+/* ============================================================
+   OEM / CUSTOMIZATION SECTION — Complete Redesign
+   ============================================================ */
 
-.oem-partnership-section {
+.oem-section {
   position: relative;
-  padding: 8rem 0;
-  background: radial-gradient(
-    circle at left bottom,
-    rgba(212, 175, 55, 0.04) 0%,
-    transparent 45%
-  );
+  background: var(--bg-body);
+  margin-top: 150px;
   overflow: hidden;
 }
 
-/* GRID (SINGLE COLUMN) */
-.oem-grid.single-column {
+/* Faint grid pattern for texture */
+.oem-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212,175,55,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,175,55,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+/* ---- Two-column layout ---- */
+.oem-layout {
   display: grid;
-  grid-template-columns: 1fr;
-  max-width: 1000px;
-  margin: 0 auto;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 5rem;
+  align-items: center;
 }
 
-/* CONTENT */
-.oem-content {
-  text-align: center;
+/* ============================================================
+   LEFT SIDE
+   ============================================================ */
+.oem-left {
+  position: relative;
 }
 
-/* SUB HEADING */
-.oem-sub-heading {
+.oem-title {
+  font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+  font-family: var(--font-heading, serif);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--text-primary, #fff);
+  margin: 1rem 0 1.8rem;
+}
+
+.oem-title em {
+  font-style: normal;
+  color: var(--primary, #d4af37);
   display: block;
-  color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 4px;
+}
+
+.oem-desc {
+  font-size: 1rem;
+  color: var(--text-secondary, rgba(255,255,255,0.5));
+  line-height: 1.8;
+  max-width: 460px;
+  margin-bottom: 2.8rem;
+}
+
+.oem-desc strong {
+  color: var(--text-primary, #fff);
+  font-weight: 600;
+}
+
+/* CTA button — reuse btn-gold from hero */
+.oem-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: var(--primary, #d4af37);
+  color: #000;
   font-size: 0.85rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--primary, #d4af37);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
 }
 
-/* TITLE OVERRIDE (OPTIONAL FINE-TUNE) */
-.oem-content .section-title {
-  font-size: 3rem;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
+.oem-cta:hover {
+  background: transparent;
+  color: var(--primary, #d4af37);
+  transform: translateY(-2px);
 }
 
-/* UNDERLINE */
-.oem-content .title-underline {
-  margin: 0 auto 3rem;
+/* Decorative large quotation mark */
+.oem-quote-mark {
+  position: absolute;
+  bottom: -60px;
+  left: -20px;
+  font-size: 18rem;
+  line-height: 1;
+  color: rgba(212,175,55,0.04);
+  font-family: Georgia, serif;
+  pointer-events: none;
+  user-select: none;
 }
 
-/* DESCRIPTION */
-.oem-description {
-  max-width: 850px;
-  margin: 0 auto 4rem;
-  font-size: 1.15rem;
-  line-height: 1.75;
-  color: var(--text-muted);
-}
-
-/* SERVICES GRID */
+/* ============================================================
+   RIGHT SIDE — 2×2 service cards
+   ============================================================ */
 .oem-services-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  margin-bottom: 4rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
 }
 
-/* SERVICE CARD */
-.oem-service-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: var(--border-radius);
-  padding: 2rem 1.5rem;
-  text-align: center;
-  transition: var(--transition);
+.oem-card {
+  background: var(--bg-card, #0e0e0e);
+  border: 1px solid var(--border-color, rgba(255,255,255,0.08));
+  padding: 1.8rem 1.6rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
-.oem-service-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-glow);
+.oem-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary, #d4af37);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
 }
 
-/* ICON */
-.oem-service-card i {
-  font-size: 1.6rem;
-  color: var(--primary);
-  margin-bottom: 1rem;
+.oem-card:hover {
+  border-color: rgba(212,175,55,0.3);
+  transform: translateY(-4px);
 }
 
-/* CARD TITLE */
-.oem-service-card h4 {
+.oem-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Alternate cards: 2nd and 3rd get slight offset for visual rhythm */
+.oem-card:nth-child(2) {
+  margin-top: 1.5rem;
+}
+
+.oem-card:nth-child(3) {
+  margin-top: -1.5rem;
+}
+
+.oem-card-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(212,175,55,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary, #d4af37);
   font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  transition: background 0.3s ease;
+}
+
+.oem-card:hover .oem-card-icon {
+  background: rgba(212,175,55,0.08);
+}
+
+.oem-card h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary, #fff);
   margin-bottom: 0.6rem;
-  color: var(--text-main);
+  line-height: 1.3;
 }
 
-/* CARD TEXT */
-.oem-service-card p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.6;
+.oem-card p {
+  font-size: 0.83rem;
+  color: var(--text-secondary, rgba(255,255,255,0.45));
+  line-height: 1.7;
 }
 
-/* CTA BUTTON */
-.oem-content .btn-primary {
-  padding: 0.8rem 2.2rem;
-  font-size: 0.95rem;
-  border-radius: 999px;
-}
-
-/* ================================
+/* ============================================================
    RESPONSIVE
-================================ */
-
-@media (max-width: 1024px) {
-  .oem-services-grid {
-    grid-template-columns: repeat(2, 1fr);
+   ============================================================ */
+@media (max-width: 1050px) {
+  .oem-layout {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
   }
-
-  .oem-content .section-title {
-    font-size: 2.5rem;
+  .oem-title {
+    font-size: clamp(2rem, 5vw, 3rem);
   }
+  .oem-desc { max-width: 100%; }
+  .oem-quote-mark { display: none; }
+  /* Remove offset on tablet */
+  .oem-card:nth-child(2),
+  .oem-card:nth-child(3) { margin-top: 0; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 520px) {
   .oem-services-grid {
     grid-template-columns: 1fr;
   }
-
-  .oem-partnership-section {
-    padding: 6rem 0;
-  }
-
-  .oem-description {
-    font-size: 1.05rem;
-  }
+  .oem-cta { clip-path: none; }
 }

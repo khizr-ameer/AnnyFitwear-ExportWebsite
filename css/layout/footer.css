@@ -1,259 +1,298 @@
-/* =========================
-   FOOTER
-========================= */
+/* ============================================================
+   FOOTER — Complete Redesign
+   ============================================================ */
 
-/* Base footer */
 .footer {
-  background-color: var(--bg-body);
-  padding: 6rem 0 0;
-  border-top: 1px solid var(--border-color);
-  color: var(--text-main);
-  
+  background: #050505;
+  color: var(--text-primary, #fff);
+  position: relative;
+  margin-top: 150px;
 }
 
-/* Grid layout */
+/* Gold top accent bar */
+.footer-top-line {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--primary, #d4af37) 30%,
+    var(--primary, #d4af37) 70%,
+    transparent 100%
+  );
+}
+
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 5rem 5% 4rem;
+}
+
+/* ============================================================
+   GRID — 4 columns
+   ============================================================ */
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 4rem;
-  padding: 0 var(--padding-container) 4rem;
-  max-width: 1600px;
-  margin: 0 auto;
+  grid-template-columns: 1.3fr 0.7fr 1fr 1.2fr;
+  gap: 3.5rem;
 }
 
-/* Footer columns */
-.footer-col h4 {
-  font-size: 1.2rem;
-  color: var(--text-main);
-  margin-bottom: 1.2rem;
-  font-family: var(--font-heading);
-}
-
-/* Footer logo */
+/* ============================================================
+   BRAND COLUMN
+   ============================================================ */
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-}
-
-.footer-logo img {
-  width: 40px;
-  height: auto;
-}
-
-/* Paragraphs */
-.footer-col p {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-bottom: 0.8rem;
-  max-width: 420px;
-  line-height: 1.5;
-}
-
-/* Links list */
-.footer-col ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-col ul li {
-  margin-bottom: 0.6rem;
- 
-  
-}
-
-.footer-col a {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  transition: var(--transition);
+  gap: 10px;
+  margin-bottom: 1.4rem;
   text-decoration: none;
 }
 
-.footer-col a:hover {
-  color: var(--primary);
+.footer-logo img {
+  width: 50px;
+  height: auto;
+  flex-shrink: 0;
 }
 
-/* Footer dropdown inside links */
-.footer-col .dropdown {
-  position: relative;
+.footer-logo span {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary, #d4af37);
+  letter-spacing: 0.5px;
 }
 
-.footer-col .dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 130%;
-  left: 0;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-soft);
-  padding: 0.8rem;
-  min-width: 300px;
-  z-index: 10;
+.footer-logo span strong {
+  color: var(--primary, #d4af37);
 }
 
-.footer-col .dropdown-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
-}
-
-.footer-col .dropdown-item {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.footer-col .dropdown-item:hover {
-  color: var(--primary);
-}
-
-/* Show dropdown on hover for desktop */
-@media (min-width: 1025px) {
-  .footer-col .dropdown:hover .dropdown-menu {
-    display: block;
-  }
-}
-
-/* Contact info */
-.contact-list {
-  list-style: none;
-  padding: 0;
-}
-
-.contact-list li {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-bottom: 0.6rem;
-}
-
-.contact-list i {
-  color: var(--primary);
-  font-size: 1rem;
+.brand-col p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.75;
+  max-width: 280px;
+  margin-bottom: 1.8rem;
 }
 
 /* Social icons */
-.social-icons {
+.footer-social {
   display: flex;
-  gap: 0.8rem;
-  margin-top: 1rem;
+  gap: 10px;
 }
 
-.social-icons a {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1px solid var(--border-color);
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--transition);
-  color: var(--text-secondary);
+  color: rgba(255,255,255,0.4);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
 }
 
-.social-icons a:hover {
-  background: var(--primary);
-  color: #000;
-  border-color: var(--primary);
+.footer-social a:hover {
+  border-color: var(--primary, #d4af37);
+  color: var(--primary, #d4af37);
+  background: rgba(212,175,55,0.06);
 }
 
-/* Newsletter */
+/* ============================================================
+   LINK COLUMNS
+   ============================================================ */
+.footer-col h4 {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--primary, #d4af37);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(212,175,55,0.15);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+/* Two-column product list */
+.footer-links.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.38);
+  text-decoration: none;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--primary, #d4af37);
+  padding-left: 4px;
+}
+
+/* ============================================================
+   CONTACT LIST
+   ============================================================ */
+.footer-contact-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.footer-contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.5;
+}
+
+.footer-contact-list i {
+  color: var(--primary, #d4af37);
+  font-size: 0.88rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+  width: 14px;
+}
+
+.footer-contact-list a {
+  color: rgba(255,255,255,0.38);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-contact-list a:hover {
+  color: var(--primary, #d4af37);
+}
+
+/* ============================================================
+   NEWSLETTER
+   ============================================================ */
+.footer-newsletter p {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 0.8rem;
+}
+
 .newsletter-form {
   display: flex;
-  gap: 0.6rem;
-  margin-top: 0.6rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.newsletter-form:focus-within {
+  border-color: rgba(212,175,55,0.4);
 }
 
 .newsletter-form input {
   flex: 1;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  padding: 0.55rem 0.8rem;
-  border-radius: 6px;
-  color: var(--text-main);
-  font-size: 0.9rem;
+  background: transparent;
+  border: none;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--text-primary, #fff);
+  outline: none;
 }
 
 .newsletter-form input::placeholder {
-  color: var(--text-muted);
+  color: rgba(255,255,255,0.2);
 }
 
 .newsletter-form button {
-  background: var(--primary);
-  color: #000;
+  width: 42px;
+  background: var(--primary, #d4af37);
   border: none;
-  padding: 0.55rem 1rem;
-  border-radius: 6px;
-  font-weight: 600;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
   cursor: pointer;
-  transition: var(--transition);
+  transition: background 0.25s ease;
+  flex-shrink: 0;
 }
 
 .newsletter-form button:hover {
-  background: var(--primary-light);
+  background: rgba(212,175,55,0.8);
 }
 
-/* Footer bottom */
+/* ============================================================
+   BOTTOM BAR
+   ============================================================ */
 .footer-bottom {
-  border-top: 1px solid var(--border-color);
-  padding: 1.5rem var(--padding-container);
-  margin-top: 19px;
-  text-align: center;
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 1.4rem 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-bottom p {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.2);
+  margin: 0;
 }
 
 .footer-bottom a {
-  color: var(--primary);
+  color: var(--primary, #d4af37);
   font-weight: 700;
   text-decoration: none;
-  transition: var(--transition);
+  transition: opacity 0.2s ease;
 }
 
 .footer-bottom a:hover {
-  color: var(--primary-light);
+  opacity: 0.75;
 }
 
-/* =========================
+/* ============================================================
    RESPONSIVE
-========================= */
+   ============================================================ */
+@media (max-width: 1100px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 2.5rem;
+  }
+}
 
-@media (max-width: 1024px) {
+@media (max-width: 640px) {
+  .footer-inner { padding: 4rem 5% 3rem; }
 
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-    padding: 0 var(--padding-container) 3rem;
   }
 
-  .footer-col .dropdown-menu {
-    position: static;
-    display: none;
-    box-shadow: none;
-    border: none;
-    background: transparent;
-    padding: 0.5rem 0;
+  .brand-col p { max-width: 100%; }
+
+  .footer-links.two-col {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .footer-col .dropdown.open .dropdown-menu {
-    display: block;
-  }
-
-  .social-icons {
-    gap: 0.5rem;
-  }
-
-  .newsletter-form {
+  .footer-bottom {
     flex-direction: column;
-  }
-
-  .newsletter-form button {
-    width: 100%;
+    text-align: center;
+    gap: 0.4rem;
   }
 }
